@@ -67,8 +67,150 @@ tænkte det ville være en nem ting lige at få gjort inden dagen var over.
 
 ## Dag 2
 
-Morgen - (tidspunkt)  
-Eftermiddag - (tidspunkt)
+Morgen - (14:16)  
+
+## tirsdag - splashScreen og homepage
+
+brugte noget af min tid til at få splashscreen til at virke ordenligt og optimiserede/stylede på home pagen så billeder og text vises frem.
+``` javascript
+
+
+return(
+
+
+    <>
+    <section>
+
+        <h1 className="text-[rgb(241,196,14)] text-7xl font-bold pb-4" >News</h1>
+        {news.map(news =>(
+
+
+<NewsCard news={news} key={news.id} />
+        ))}
+    </section>
+    
+    </>
+)
+}
+
+
+```
+
+
+problemet med splashscreen var at jeg ikke lod den blive på selve splashscreen, og fordi den ikke havde sin egen page
+
+```javascript
+const handleStartClick = () => {
+    if (typeof onStart === "function") {
+      onStart();
+      return;
+    }
+
+    window.sessionStorage.setItem("hasStartedTraining", "true");
+    router.push("/");
+  }
+
+```
+
+``` javascript
+export default function ClientLayout({ children }) {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const hasStarted = window.sessionStorage.getItem("hasStartedTraining") === "true";
+    if (hasStarted) {
+      setShowSplash(false);
+    }
+  }, []);
+
+  const handleStart = () => {
+    window.sessionStorage.setItem("hasStartedTraining", "true");
+    setShowSplash(false);
+  };
+
+  if (showSplash) {
+    return <SplashScreen onStart={handleStart} />;
+  }
+```
+
+som gjorde at det endelig virkede jeg ville nu prøve at få 
+
+1. få classes til at virke
+     * Via fetch
+
+2. få id til classes til at virke via params
+
+
+
+
+
+Eftermiddag - (15:27)
+
+
+## tirsdag - Login og Profile ( og lidt med classes)
+
+ved brug af landrup har det været ret nemt at arbjede med login og profile da de er næsten ens. så stylingen var nok underligt nok det sværeste der var
+
+Eksempel:
+
+
+landrup:
+```javascript
+
+  <div className="bg-white w-full flex flex-col items-center py-6 shadow">
+                <Image src="/user.svg" alt="User profile" width={80} height={80} priority />
+               <h2 className="mt-2 text-xl font-bold text-[#003645]">
+                     {user.firstname} {user.lastname}
+                 </h2>
+
+<p className="text-[#003645] text-sm">{user.role === "instructor" ? "Instruktør" : "Medlem"}</p>
+<InstructorActivities userId={user.id} />
+        </div>
+        <div>
+          {user.activities.map(activity => ( 
+            <article key={activity.id}> 
+              <div className="bg-[#cfd8dc] rounded-xl p-6 w-[75%] align-center shadow-md border-4 border-[#003645]">
+                <div className="mb-4">
+                  <h3>{activity.name}</h3>
+                  <div className="text-[#003645] text-lg mt-2">
+                    {activity.weekday} kl. {activity.time}
+                  </div>
+                </div>
+                <Link href={`/activities/${activity.id}`}
+                  className="bg-[#003645] text-white rounded-lg px-8 py-2 shadow-md font-medium text-lg transition "
+                >
+                  Vis hold
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </>
+    )
+}
+
+
+```
+Believe fitness:
+```javascript
+   <div className="bg-white w-full flex flex-col items-center py-6 shadow">
+         
+               <h2 className="mt-2 text-xl font-bold text-[#003645]">
+                     {user.userFirstName} {user.userLastName}
+                 </h2>
+
+
+
+        </div>
+
+```
+har fjernet ret meget da instruktør er noget jeg ville aberjde på måske imorgen?
+
+når, men classes var overreskende nok svært, da javascript ikke tillader at bruge "class" var jeg nød til at bruge class: classData  fordi react allerede bruger class som en prop så jeg renamede den via "Destructuring" 
+
+selve (id) på classes var nemme da de brugte det samme kode fra landrup.
+
+
 
 ## Dag 3
 
