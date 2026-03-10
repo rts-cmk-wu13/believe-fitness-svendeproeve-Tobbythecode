@@ -1,7 +1,7 @@
-"use client"
+
 import {getNews} from "@/lib/dal";
 import NewsCard from "../newscard/NewsCard";
-import { useRouter } from "next/navigation";
+
 
 export default async function News(){
 const news = await getNews()
@@ -15,6 +15,8 @@ return(
 
     <>
     <section>
+
+        <h1 className="text-[rgb(241,196,14)] text-7xl font-bold pb-4" >News</h1>
         {news.map(news =>(
 
 
