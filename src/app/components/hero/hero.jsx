@@ -1,6 +1,6 @@
 
 
-export default async function Hero(){
+export default function Hero(){
 
 
 
