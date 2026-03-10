@@ -1,11 +1,26 @@
 "use client";
 
-
-
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import SplashScreen from "./components/SplashScreen";
 
 export default function ClientLayout({ children }) {
-  const pathname = usePathname();
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const hasStarted = window.sessionStorage.getItem("hasStartedTraining") === "true";
+    if (hasStarted) {
+      setShowSplash(false);
+    }
+  }, []);
+
+  const handleStart = () => {
+    window.sessionStorage.setItem("hasStartedTraining", "true");
+    setShowSplash(false);
+  };
+
+  if (showSplash) {
+    return <SplashScreen onStart={handleStart} />;
+  }
 
   return (
 <>
