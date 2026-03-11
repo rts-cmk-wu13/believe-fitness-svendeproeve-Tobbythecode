@@ -23,7 +23,9 @@ throw new Error({ message: "noget gik galt"})
 
     export async function getAllClasses() {
     try {
-        const response = await fetch(`http://localhost:4000/api/v1/classes/`);
+            const response = await fetch(`http://localhost:4000/api/v1/classes/`, {
+                cache: "no-store"
+            });
         if (!response.ok) {
 throw new Error({ message: "noget gik galt"})
         }
@@ -36,7 +38,9 @@ throw new Error({ message: "noget gik galt"})
 
 export async function getAllClassesById(id) {
   
-        const response = await fetch(`http://localhost:4000/api/v1/classes/${id}`);
+        const response = await fetch(`http://localhost:4000/api/v1/classes/${id}`, {
+            cache: "no-store"
+        });
         if (!response.ok) {
             console.error("getAllClassesById error:", response.status, response.statusText);
             return null;
