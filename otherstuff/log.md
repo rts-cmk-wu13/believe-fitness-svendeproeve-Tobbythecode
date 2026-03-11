@@ -65,7 +65,7 @@ const poppins = Poppins({
 
 tænkte det ville være en nem ting lige at få gjort inden dagen var over.
 
-## Dag 2
+# Dag 2
 
 Morgen - (14:16)  
 
@@ -212,10 +212,105 @@ selve (id) på classes var nemme da de brugte det samme kode fra landrup.
 
 
 
-## Dag 3
+# Dag 3
 
-Morgen - (tidspunkt)  
-Eftermiddag - (tidspunkt)
+Morgen - (15:01)  
+
+
+## onsdag - Logout og dialouge
+
+
+wow. det her et skrevet sent men jeg synes jeg har fået ret meget lavede, det kunne tilfældigt også være fordi det er ting vi har arbjedet med før.
+
+
+med Logout har det været ret nemt da vi skal bare bruge det samme kode fra landrup, 
+
+```javascript
+
+     {
+
+isUserLoggedIn
+? <button type="submit"> logud</button>
+: <Link href="/login"> login</Link>
+
+
+
+        }
+
+```
+
+jeg spørger den bare om hvis jeg er logget ind skal den sige jeg er og hvis ikke skal jeg logge ind (mere fra action.js)
+
+
+
+det sværeste var nok dialouge, da det er ret nyt for mig, men efter at se en video fik jeg okay forståelse af det
+
+
+
+
+
+Eftermiddag - (15:45)
+
+## onsdag - Jeg tror er tæt på profil 
+
+
+skriver dette ret hurtig men jeg er tæt på at få profil tilmelding til at fungere, virke ikke lige nu men gad godt lige at vise det her
+
+```javascript
+
+export default async function Profilepage() {
+    const cookieStore = await cookies()
+const userId = cookieStore.get("userId")?.value
+const token = cookieStore.get("authToken")?.value
+
+const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+     cache: "no-store"
+  })
+  const user = await res.json()
+ 
+
+
+
+    return (
+
+
+      <>
+      <div className="bg-white w-full flex flex-col items-center py-6 shadow">
+         
+               <h2 className="mt-2 text-xl font-bold text-[#003645]">
+                     {user.userFirstName} {user.userLastName}
+                 </h2>
+                 <p className="mt-1 text-sm text-[#003645]">Mine hold</p>
+        </div>
+
+        <section className="px-4 py-6">
+    
+     
+        </section>
+  
+      </>
+    )
+}
+
+
+```
+
+
+som du kan se mangler den ret meget men skal nok gøre færdig i morgen !
+
+1. skal arbjede på instructor og rating
+     * skal nok se videon igen
+
+2. få profil tilmelding og forlad til at virke
+
+3. style på det hele lidt mere
+
+4. lave footer
+
 
 ## Dag 4
 
