@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import SplashScreen from "./components/SplashScreen";
-
+import Header  from "./components/Header/header.jsx"
 export default function ClientLayout({ children }) {
   const [showSplash, setShowSplash] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     const hasStarted = window.sessionStorage.getItem("hasStartedTraining") === "true";
@@ -24,6 +26,7 @@ export default function ClientLayout({ children }) {
 
   return (
 <>
+{pathname !== "/login" && <Header />} 
       <div className="pb-20">{children}</div>
    
 </>
