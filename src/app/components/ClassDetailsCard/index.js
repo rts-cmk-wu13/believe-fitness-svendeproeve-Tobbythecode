@@ -1,6 +1,4 @@
 "use client"
-import Image from "next/image";
-import Cookies from "js-cookie"
 import { useRouter } from "next/navigation";
 
 export default function ClassDetailsCard({ class: classData, isEnrolled, userId, token }) {
@@ -18,7 +16,11 @@ router.refresh()
 }
 
 const handleJoin = async () => {
-await fetch(`http://localhost:4000/api/v1/users/2/classes/${classData.id}`,{
+if (!userId || !token) {
+  router.push("/login");
+  return;
+}
+await fetch(`http://localhost:4000/api/v1/users/${userId}/classes/${classData.id}`,{
 method: "POST",
 headers: {
   Authorization: `Bearer ${token}`
@@ -52,7 +54,7 @@ router.refresh()
 
       { isEnrolled
 ?    <button onClick={handleLeave} className="absolute bottom-5 right-5 py-3 px-10 bg-primary- rounded-xl">forlad</button>
-:         <button onClick={handleJoin} className="absolute bottom-5 right-5 py-3 px-10 bg-primary- rounded-xl">Tilmed</button>
+:         <button onClick={handleJoin} className="absolute bottom-5 right-5 py-3 px-10 bg-primary- rounded-xl">Tilmeld</button>
 }
 
       <p >{classData.classDay} - {classData.classTime}</p>
