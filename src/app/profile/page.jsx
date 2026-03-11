@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import Link from "next/link";
 
 
 
@@ -7,8 +8,6 @@ export default async function Profilepage() {
 const userId = cookieStore.get("userId")?.value
 const token = cookieStore.get("authToken")?.value
 
-console.log("her er min userId", userId)
-console.log("her er min token", token)
 const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
     method: "GET",
     headers: {
@@ -16,10 +15,8 @@ const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
     },
      cache: "no-store"
   })
-console.log (res)
   const user = await res.json()
-    console.log(user)
-
+ 
 
 
 
@@ -32,10 +29,13 @@ console.log (res)
                <h2 className="mt-2 text-xl font-bold text-[#003645]">
                      {user.userFirstName} {user.userLastName}
                  </h2>
-
-
-
+                 <p className="mt-1 text-sm text-[#003645]">Mine hold</p>
         </div>
+
+        <section className="px-4 py-6">
+    
+     
+        </section>
   
       </>
     )
