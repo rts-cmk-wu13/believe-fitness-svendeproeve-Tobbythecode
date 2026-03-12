@@ -53,39 +53,28 @@ cookieStore.set("role" , data.role)
 
 
 
-// "use server"
 
-// import { redirect } from "next/dist/server/api-utils"
-// import { cookies } from "next/headers"
-
-// export async function loginUser(prevState, formData) {
-
-//     const cookieStore =  cookies()
+export async function getUserById() {
+    const cookieStore = await cookies()
 
 
-//     console.log("halloo")
-//     const username = formData.get("username")
-//     const password = formData.get("password")
+if (!cookieStore.has("userId")) return null
+
+    const userId = cookieStore.get("userId")?.value;
+    const authToken = cookieStore.get("authToken").value
+    
+const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+     cache: "no-store"
+  })
+
+  return await res.json();
+}
 
 
-//     const res = await fetch("http://localhost:4000/api/v1/auth/token", {
 
-//         method: "POST", 
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//       body: JSON.stringify({ username, password })
-//     })
 
-//     if(!res.ok){
-//         throw new Error("Login failed")
-//     }
 
-//     const data = await res.json()
-
-//     console.log(data)
-//  cookieStore.set("authToken", data.token)
-//  cookieStore.set("userId", data.userId)
-
-//  redirect("/profile")
-// }
