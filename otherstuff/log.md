@@ -314,7 +314,28 @@ som du kan se mangler den ret meget men skal nok gøre færdig i morgen !
 
 ## Dag 4
 
-Morgen - (tidspunkt)  
+Morgen - (15:41)  
+
+
+bliver nød til at mikse både morgen og eftermiddag da jeg ikke har haft tid til at logge i dag
+
+når!
+
+jeg fik endelig min profil til at kunne tilmelde til forskellige classer som medlemmer... men... jeg har arbejdet med at få oprettelse af classer til at virke hele dagen nu, som stadig ikke virker.
+
+men! jeg ved jeg er tæt på det, føles som om det er bare en linje væk før det virker,
+
+
+i morgen er den sidste dag hvor jeg skal
+
+1. få class oprettelse til at virke
+
+2. få oprettet rating
+
+
+OPDATERING - jeg fik classoprettelse lige til at virke!
+
+
 Eftermiddag - (tidspunkt)
 
 ## Dag 5
