@@ -1,21 +1,21 @@
+
+import { getUserById } from "@/lib/user";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import InstructorClasses from "../components/instructorClasses";
 
 
 
 export default async function Profilepage() {
     const cookieStore = await cookies()
-const userId = cookieStore.get("userId")?.value
-const token = cookieStore.get("authToken")?.value
+const userId = cookieStore.get("userId")
+const user = await getUserById(userId.value)
+const isInstructor = ["admin", "instructor", "instruktør"].includes(
+  String(user.role).toLowerCase()
+)
 
-const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-     cache: "no-store"
-  })
-  const user = await res.json()
+
+  console.log(user)
  
 
 
@@ -24,18 +24,51 @@ const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
 
 
       <>
-      <div className="bg-white w-full flex flex-col items-center py-6 shadow">
+      <div className="bg-white w-full flex flex-col items-center py-5">
          
                <h2 className="mt-2 text-xl font-bold text-[#003645]">
                      {user.userFirstName} {user.userLastName}
                  </h2>
+                 <p className="text-[#003645] text-sm">{isInstructor ? "Instruktør" : "Medlem"}</p>
                  <p className="mt-1 text-sm text-[#003645]">Mine hold</p>
         </div>
 
-        <section className="px-4 py-6">
+<section className="p-5   content-center ">
+  <div className="gap-6    ">
+    {isInstructor ? (
+      <InstructorClasses userId={userId.value} />
+    ) : (
+      (Array.isArray(user.classes) ? user.classes : []).map(classData => ( 
+      <article key={classData.id} className="text-black p-5" > 
+ <div className="rounded-xl p-5  border-black border text-black">
+  <div className="mb-6">
+    <h3 className="font-bold text-2xl">{classData.className}</h3>
+    <div className="text-lg mt-2">
+      {classData.classDay} kl. {classData.classTime}
+    </div>
+  </div>
+<div className="flex justify-between ">
+  <Link
+    href={`/classes/${classData.id}`}
+    className="rounded-lg shadow-md font-medium text-lg px-6 py-3 bg-[rgb(241,196,14)]"
+  >
     
-     
-        </section>
+    Show class
+  </Link>
+  
+  <Link
+    href={`/classes/${classData.id}`}
+    className="rounded-lg shadow-md font-medium text-lg px-6 py-3 bg-[rgb(241,196,14)]"
+  >
+    
+    leave
+  </Link></div>
+</div>
+      </article>
+    ))
+    )}
+  </div>
+</section>
   
       </>
     )
@@ -43,41 +76,3 @@ const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
 
 
 
-//     const activities = Array.isArray(user.activities) ? user.activities : [];
-//     const sectionTitle =
-//         user.role === "instruktør" || user.role === "instructor
-//             </div>
-//             <div className="bg-white w-full flex flex-col items-center py-6 shadow">
-//                 <Image src="/user.svg" alt="User profile" width={80} height={80} priority />
-//                 <h2 className="mt-2 text-xl font-bold text-[#003645]">
-//                     {user.firstname} {user.lastname}
-//                 </h2>
-//                 <p className="text-[#003645] text-sm">{user.role}</p>
-//             </div>
-//             <div className="w-full bg-[#003645] text-white px-4 py-2 flex items-center justify-between mt-4">
-//                 <span className="font-semibold">{sectionTitle}</span>
-//             </div>
-//           {user.role !== "instruktør" && user.role !== "instructor" && (
-//   <ul className="flex flex-wrap gap-4">
-//     {activities.map(activity => (
-//       <li key={activity.id}>
-//         <div className="bg-[#cfd8dc] rounded-xl p-6 max-w-xs shadow-md border-4 border-[#003645]">
-//           <div className="mb-4">
-//             <div className="text-2xl font-bold text-[#003645]">{activity.name}</div>
-//             <div className="text-[#003645] text-lg mt-2">
-//               {activity.weekday} kl. {activity.time}
-//             </div>
-//           </div>
-//           <button
-//             className="bg-[#003645] text-white rounded-lg px-8 py-2 shadow-md font-medium text-lg transition "
-//           >
-//             Vis hold
-//           </button>
-//         </div>
-//       </li>
-//     ))}
-//   </ul>
-// )}
-//         </>
-//     );
-// }
