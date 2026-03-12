@@ -5,7 +5,7 @@ export default function ClassCard({ class: classData }) {
     <div className="flex justify-center font-sans my-4">
       <main className="max-w-3xl flex flex-col items-center gap-4">
         <Link href={`/classes/${classData.id}`}>
-          <article className="flex flex-col items-center gap-3">
+          <article className="flex flex-col p-5 items-center gap-3">
    <div className="relative w-full sm:w-125 h-125 rounded-lg overflow-hidden">
               <img
                 className="w-full h-full object-cover"
