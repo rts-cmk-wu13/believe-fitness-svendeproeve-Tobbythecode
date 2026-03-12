@@ -1,4 +1,5 @@
 "use server"
+import { cookies } from "next/headers"
 
 export async function getNews(){
 
@@ -47,3 +48,25 @@ export async function getAllClassesById(id) {
         }
         return await response.json();
     } 
+
+
+
+    export async function createClass(prevState, formData) {
+
+        const cookieStore = await cookies()
+        const authToken = cookieStore.get("authToken").value
+
+        
+console.log(Object.fromEntries(formData))
+
+const res = await fetch("http://localhost:4000/api/v1/classes/", {  
+    method: "POST",
+    headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "multipart/form-data"
+    },
+    body: formData
+})
+
+
+    }
