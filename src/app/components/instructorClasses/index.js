@@ -18,7 +18,7 @@ return (
     <>
 
     <h1>Mine hold</h1>
-    <Link href={"/opret/hold"}>+</Link>
+    <Link href={"/opretClass"}>+</Link>
     <ul className="p-5 mt-4 text-black">
 {instructorClasses.map((classData) => (
     <li key={classData.id} className="p-5 mb-5 bg-secondary/70 rounded-lg text-primary">
