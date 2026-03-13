@@ -11,6 +11,8 @@ export default async function CreateTeam(){
     const userId = cookieStore.get("userId").value
     const user = await getUserById()
 
+    const authToken = cookieStore.get("authToken").value 
+
 
     return role !== "admin" ? (
 <>
