@@ -44,13 +44,12 @@ router.refresh()
         <> 
 
 <div className="relative w-full h-full rounded-t-lg overflow-hidden  text-black">
-      {classData.asset?.url ? (
         <img
           src={classData.asset.url}
           alt={classData.className}
           className="w-full h-full object-cover"
         />
-      ) : null}
+      
 
       { isEnrolled
 ?    <button onClick={handleLeave} className="absolute bottom-5 right-5 py-3 px-10 bg-primary- rounded-xl">forlad</button>
