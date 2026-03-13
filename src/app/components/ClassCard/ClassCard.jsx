@@ -9,7 +9,7 @@ export default function ClassCard({ class: classData }) {
    <div className="relative w-full sm:w-125 h-125 rounded-lg overflow-hidden">
               <img
                 className="w-full h-full object-cover"
-                src={classData.asset.url}
+                src={classData.asset?.url}
                 alt={classData.className}
               />
 
