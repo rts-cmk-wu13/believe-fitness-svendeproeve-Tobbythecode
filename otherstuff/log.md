@@ -340,5 +340,35 @@ Eftermiddag - (tidspunkt)
 
 ## Dag 5
 
-Morgen - (tidspunkt)  
+Morgen - (13:49)  
+
+efter meget arbejde (og med lidt hjælp) fik jeg endelig min post ind på databasen
+
+jeg har ikke så meget tid til at skrive dette men her er noget af koden der hjalp
+
+```javascript
+ const cookieStore = await cookies()
+    const role = cookieStore.get("role").value
+    const userId = cookieStore.get("userId").value
+    const user = await getUserById()
+    const authToken = cookieStore.get("authToken").value 
+
+
+    return role !== "admin" ? (
+<>
+        <p className="text-red-500">du har ikke adgang til at oprette hold</p>
+        <Link href={"/classes"}>tilbage til Aktiviteter</Link>
+   </>
+    ) : (
+<>
+        <p>du er admin</p>
+        <CreateClassForm userId={userId} userFirstName={user.userFirstName} userLastName={user.userLastName}  />
+    </>
+    )     
+  
+
+
+```
+
+
 Eftermiddag - (tidspunkt)
